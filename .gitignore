@@ -1,0 +1,16 @@
+!debug_ku3_2ddr.tcl
+!kernel.cpp
+!kernel_global_bandwidth.c
+!old_kernel.cpp
+!run_ku3_2ddr.tcl
+!rtl_prj/run_ku3_2ddr.tcl
+!vv_prj/bandiwdth_info.xml
+!vv_prj/gen_xo.tcl
+!vv_prj/kernel.xml
+!vv_prj/xo.sh
+*.Xil/
+*.jou
+*.log
+ip_repo/
+vhls_prj/
+prj_hw_ku3_2ddr
