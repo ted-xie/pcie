@@ -54,7 +54,8 @@ void read_compute_write(wwrd_256 * indata, wwrd_512 * outdata) {
     write(outdata, &outbuffer);
 }
 
-extern "C" void bandwidth(wwrd_512 * outbuffer, wwrd_256 * inbuffer) {
+//extern "C"
+void bandwidth(wwrd_512 * outbuffer, wwrd_256 * inbuffer) {
 #pragma HLS INTERFACE m_axi port=inbuffer offset=slave bundle=gmem1 num_write_outstanding=16 num_read_outstanding=16 max_write_burst_length=16 max_read_burst_length=16
 #pragma HLS INTERFACE m_axi port=outbuffer offset=slave bundle=gmem0 num_write_outstanding=16 num_read_outstanding=16 max_write_burst_length=16 max_read_burst_length=16
 

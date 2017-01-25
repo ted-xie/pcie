@@ -12,6 +12,7 @@
 *.jou
 *.log
 *.xo
+*.str
 ip_repo/
 vhls_prj/
 prj_hw_ku3_2ddr
