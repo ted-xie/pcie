@@ -1,6 +1,5 @@
 #include <string.h>
 #include <stdlib.h>
-#include <hls_stream.h>
 
 #define WORD_SIZE 64//512 bits
 
