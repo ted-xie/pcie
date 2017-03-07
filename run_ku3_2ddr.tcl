@@ -14,7 +14,7 @@ create_opencl_binary bin_bandwidth
 set_property region OCL_REGION_0 [get_opencl_binary bin_bandwidth]
 
 create_kernel -type c bandwidth
-add_files -kernel [get_kernels bandwidth] old_kernel.c
+add_files -kernel [get_kernels bandwidth] copy_kernel.c
 create_compute_unit -opencl_binary [get_opencl_binary bin_bandwidth] -kernel [get_kernels bandwidth] -name bandwidth0
 
 #create individual master ports for each global memory pointer and
