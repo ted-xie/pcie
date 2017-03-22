@@ -5,7 +5,7 @@
 #define COUNT 64
 #define WHICH 2
 
-void bandwidth(wwrd_512 *output_port, wwrd_256 *input_port)
+void bandwidth(dout_t *output_port, din_t *input_port)
 {
     #pragma HLS INTERFACE m_axi port=output_port offset=slave bundle=gmem0
     #pragma HLS INTERFACE m_axi port=input_port offset=slave bundle=gmem1
@@ -24,10 +24,10 @@ void bandwidth(wwrd_512 *output_port, wwrd_256 *input_port)
 
     outerloop:
     for (blockindex=0; blockindex < DATA_SIZE/64; blockindex+=2) {
-        wwrd_512 reports;
+        dout_t reports;
 #pragma HLS DATA_PACK variable=reports
 #pragma HLS RESOURCE variable=reports core=RAM_2P_BRAM
-        wwrd_256 inbuffer = input_port[blockindex];
+        din_t inbuffer = input_port[blockindex];
 #pragma HLS DATA_PACK variable=inbuffer
 #pragma HLS RESOURCE variable=inbuffer core=RAM_2P_BRAM
 
@@ -48,9 +48,9 @@ void bandwidth(wwrd_512 *output_port, wwrd_256 *input_port)
 
 	outerloop:
 	for (blockindex = 0; blockindex < DATA_SIZE/32; blockindex += COUNT) {
-		wwrd_256 inbuffer[COUNT];
+		din_t inbuffer[COUNT];
 #pragma HLS RESOURCE variable=inbuffer core=RAM_2P_BRAM latency=1
-		wwrd_512 outbuffer[COUNT];
+		dout_t outbuffer[COUNT];
 #pragma HLS RESOURCE variable=outbuffer core=RAM_2P_BRAM latency=1
 
 		// populate the inbuffer
@@ -85,18 +85,21 @@ void bandwidth(wwrd_512 *output_port, wwrd_256 *input_port)
 
 	outerloop:
 	for (blockindex = 0; blockindex < DATA_SIZE/32; blockindex++) {
-		wwrd_256 inbuffer = input_port[blockindex];
+		din_t inbuffer = input_port[blockindex];
 #pragma HLS DATA_PACK variable=inbuffer
-		wwrd_512 outbuffer;
+		dout_t outbuffer;
 #pragma HLS DATA_PACK variable=outbuffer
 		innerloop:// read two bytes at a time
 		for (i = 0; i < 32; i+=2) {
 #pragma HLS pipeline ii=1
-			unsigned char load0AB = inbuffer.data[i];
+			/*unsigned char load0AB = inbuffer.data[i];
 			unsigned char load1CD = inbuffer.data[i+1];
 
 			unsigned short result0 = 0xAB00 + load0AB;
-			unsigned short result1 = 0xCD00 + load1CD;
+			unsigned short result1 = 0xCD00 + load1CD; */
+
+			unsigned short loadAB = inbuffer.data[i];
+			unsigned short resultAB = AB00 + loadAB;
 
 			outbuffer.data[i] = result0;
 			outbuffer.data[i+1] = result1;
