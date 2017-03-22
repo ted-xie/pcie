@@ -9,7 +9,7 @@
 
 #include <unistd.h>
 #include <sys/time.h>
-
+#include "copy_kernel.h"
 /////////////////////////////////////////////////////////////////////////////////
 //load_file_to_memory
 //Allocated memory for and load file from disk memory
@@ -188,8 +188,8 @@ int main(int argc, char** argv)
 
     int err;
 
-    size_t globalbuffersize = 10*1024*1024;
-    size_t globaloutputsize = globalbuffersize*2;
+    size_t globalbuffersize = DATA_SIZE;
+    size_t globaloutputsize = OUTPUT_SIZE;
 
     //opencl setup
     cl_platform_id platform_id;
@@ -347,6 +347,7 @@ int main(int argc, char** argv)
 
     gettimeofday(&end_tin, NULL);
 
+    int cycles = 32; // never change this!!!
     //execute kernel
     err = clSetKernelArg(kernel, 0, sizeof(cl_mem), &output_buffer);
     err |= clSetKernelArg(kernel, 1, sizeof(cl_mem), &input_buffer);

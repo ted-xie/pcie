@@ -34,7 +34,7 @@ void compute(hls::stream<wwrd_256> * indata, hls::stream<wwrd_512> * outdata) {
     for (int i = 0; i < BUFSIZE; i++) {
         wwrd_256 inbuffer = indata->read();
         wwrd_512 outbuffer;
-        for (int j = 0; j < 32+inbuffer.data[0]; j++) {
+        for (int j = 0; j < 32; j++) {
             unsigned short result = 0xAB00 + inbuffer.data[j];
             outbuffer.data[j] = result;
         }
