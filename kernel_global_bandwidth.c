@@ -351,7 +351,6 @@ int main(int argc, char** argv)
     //execute kernel
     err = clSetKernelArg(kernel, 0, sizeof(cl_mem), &output_buffer);
     err |= clSetKernelArg(kernel, 1, sizeof(cl_mem), &input_buffer);
-    err |= clSetKernelArg(kernel, 2, sizeof(int), &cycles);
 
     if (err != CL_SUCCESS) {
         printf("ERROR: Failed to set kernel arguments! %d\n", err);
