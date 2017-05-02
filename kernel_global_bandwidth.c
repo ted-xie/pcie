@@ -243,7 +243,7 @@ int main(int argc, char** argv)
     }
     unsigned int i;
     for(i=0; i<globalbuffersize; i++)
-        input_host[i]=0;
+        input_host[i]=i;
     cl_mem input_buffer;
 #ifdef KU3_2DDR
     cl_mem_ext_ptr_t input_buffer_ext;
@@ -511,6 +511,12 @@ int main(int argc, char** argv)
 
     //add clean up code
     //
+
+    int numErrors = 0;
+    for (i = 0; i < globalbuffersize; i++) {
+	if (output_host[i] != input_host[i]) {numErrors++;};
+    }
+    printf("numErrors: %d\n", numErrors); 
 
     return EXIT_SUCCESS;
 
