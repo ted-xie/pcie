@@ -30,8 +30,8 @@ void bandwidth(dout_t *output_port, din_t *input_port)
 #pragma HLS pipeline ii=1 // ensure that the iteration interval is just 1 cycle
 			unsigned char loadAB = inbuffer.data[i]; // look for "AB" in generated RTL
 			unsigned char loadCD = inbuffer.data[i+1]; // look for "CD" in generated RTL
-			unsigned char resultAB = 0x00 + loadAB;
-			unsigned char resultCD = 0x00 + loadCD;
+			unsigned char resultAB = 0xFA + loadAB;
+			unsigned char resultCD = 0xFB + loadCD;
 
 			outbuffer.data[i] = resultAB;
 			outbuffer.data[i+1] = resultCD;

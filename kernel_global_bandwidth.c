@@ -186,8 +186,9 @@ int main(int argc, char** argv)
     // binary container name is bin_bandwidth unless path is provided on command line
     const char *binary_container_name = argc > 1 ? argv[1] : "bin_bandwidth.xclbin";
 
-    int err;
 
+    int err;
+    unsigned int i;
     size_t globalbuffersize = DATA_SIZE;
     size_t globaloutputsize = OUTPUT_SIZE;
 
@@ -241,9 +242,26 @@ int main(int argc, char** argv)
         printf("Error: Failed to allocate host side copy of OpenCL source buffer of size %i\n",globaloutputsize);
         return -1;
     }
-    unsigned int i;
-    for(i=0; i<globalbuffersize; i++)
-        input_host[i]=i;
+
+    if (argc < 3) {
+        printf("WARNING: Usage: ./<executable> <xclbin> <input_file> <print output, y/n>\n");
+        printf("INFO: Automatically sending dummy data...\n");
+        for(i=0; i<globalbuffersize; i++)
+            input_host[i]=i;
+    } else { 
+        FILE *fp = fopen(argv[2], "rb");
+        fread(input_host, globalbuffersize, 1, fp);
+        fclose(fp);
+    }
+
+    unsigned int printOutput = 0;
+    if (argc >= 4) {
+        if (argv[3][0] == 'y')
+            printOutput = 1;
+    } else {
+        printf("INFO: Not going to print out outputs...\n");
+    }
+
     cl_mem input_buffer;
 #ifdef KU3_2DDR
     cl_mem_ext_ptr_t input_buffer_ext;
@@ -383,28 +401,6 @@ int main(int argc, char** argv)
 
     gettimeofday(&end_t1, NULL);
 
-    printf("Sleeping ...\n");
-
-    //sleep(5);
-
-    printf("Run second time ...\n");
-
-    gettimeofday(&start_t2, NULL);
-
-    //err = clEnqueueTask(command_queue, kernel, 0, NULL, &ndrangeevent2);
-	err = clEnqueueNDRangeKernel(command_queue, kernel, 1, NULL, global, local, 0, NULL, &ndrangeevent2);
-    if (err != CL_SUCCESS) {
-        printf("ERROR: Failed to execute kernel %d\n", err);
-        printf("ERROR: Test failed\n");
-        return EXIT_FAILURE;
-    } else {
-        printf("SUCCESS: Executed kernel x2.\n");
-    }
-
-    //clFinish(command_queue);
-    clWaitForEvents(1, &ndrangeevent2);
-
-
     gettimeofday(&start_tout, NULL);
 
     //copy results back from OpenCL buffer
@@ -433,26 +429,6 @@ int main(int argc, char** argv)
     //    output_host[i] = map_output_buffer[i];
     memcpy(output_host, map_output_buffer, globaloutputsize);
 
-    cl_event event2;
-    err = clEnqueueUnmapMemObject(command_queue,
-                                  output_buffer,
-                                  map_output_buffer,
-                                  0,
-                                  NULL,
-                                  &event2);
-    if (err != CL_SUCCESS) {
-        printf("Error: Failed to copy output from OpenCL buffer\n");
-        printf("Error: Test failed\n");
-        return -1;
-    } else {
-        printf("SUCCESS: Copied output data into local memory.\n");
-    }
-    clFinish(command_queue);
-
-    /*err  = clEnqueueReadBuffer(command_queue, output_buffer, CL_TRUE, 0, globalbuffersize, output_host, 0, NULL, NULL);
-    if (err != CL_SUCCESS) printf("Error in clEnqueueReadBuffer output_buffer\n");*///Slower
-    gettimeofday(&end_t2, NULL);
-
     gettimeofday(&end_tout, NULL);
 
     //profiling information
@@ -468,34 +444,38 @@ int main(int argc, char** argv)
     double bpersec1 = (dbytes/dsduration1);
     double mbpersec1 = bpersec1 / ((double) 1024*1024 );
 
-    //
-    clGetEventProfilingInfo(ndrangeevent2, CL_PROFILING_COMMAND_START, sizeof(uint64_t), ((void *)(&nstimestart)), NULL);
-    clGetEventProfilingInfo(ndrangeevent2, CL_PROFILING_COMMAND_END,   sizeof(uint64_t), ((void *)(&nstimeend)),   NULL);
-    nsduration2 = nstimeend-nstimestart;
-
-    double dnsduration2 = ((double)nsduration2);
-    double dsduration2 = dnsduration2 / ((double) 1000000000);
-
-    double bpersec2 = (dbytes/dsduration2);
-    double mbpersec2 = bpersec2 / ((double) 1024*1024 );
-
-    //
     t1 = (end_t1.tv_sec + end_t1.tv_usec/(double)(1000000)) - (start_t1.tv_sec + start_t1.tv_usec/(double)(1000000));
-    t2 = (end_t2.tv_sec + end_t2.tv_usec/(double)(1000000)) - (start_t2.tv_sec + start_t2.tv_usec/(double)(1000000));
 
     double bpersec1_ = (dbytes/t1);
     double mbpersec1_ = bpersec1_ / ((double) 1024*1024 );
-    double bpersec2_ = (dbytes/t2);
-    double mbpersec2_ = bpersec2_ / ((double) 1024*1024 );
 
+
+    //add clean up code
+    //
+
+/*    int numErrors = 0;
+    for (i = 0; i < globalbuffersize; i++) {
+        if ((i & 1) == 0) {
+            if (output_host[i] != (input_host[i] + 0xFA)) {numErrors++;}
+        } else {
+            if (output_host[i] != (input_host[i] + 0xFB)) {numErrors++;}
+        }
+    }
+    printf("numErrors: %d\n", numErrors); 
+*/
+
+    for (i = 0; i < globalbuffersize; i++) {
+        if (printOutput && output_host[i] != 0)
+            printf("Cycle %d report\n", i);
+    }
     printf("Kernel completed read/write %.0lf MB bytes from/to global memory.\n", dmbytes);
-    printf("clGetEventProfilingInfo - Execution time (1st) = %f (sec); Execution time (2nd) = %f (sec) \n", dsduration1, dsduration2);
-    printf("clGetEventProfilingInfo - Concurrent Read and Write Throughput (1st) = %f (MB/sec); Concurrent Read and Write Throughput (2nd) = %f (MB/sec) \n", mbpersec1, mbpersec2);
+    printf("clGetEventProfilingInfo - Execution time (1st) = %f (sec)\n", dsduration1);
+    printf("clGetEventProfilingInfo - Concurrent Read and Write Throughput (1st) = %f (MB/sec)\n", mbpersec1);
     printf("\n");
-    printf("gettimeofday - Execution time (1st) = %f (sec); Execution time (2nd) = %f (sec) \n", t1, t2);
-    printf("gettimeofday - Concurrent Read and Write Throughput (1st) = %f (MB/sec); Concurrent Read and Write Throughput (2nd) = %f (MB/sec) \n", mbpersec1_, mbpersec2_);
+    printf("gettimeofday - Execution time (1st) = %f (sec)\n", t1);
+    printf("gettimeofday - Concurrent Read and Write Throughput (1st) = %f (MB/sec);\n", mbpersec1_);
     printf("\n");
-    printf("Overhead of kernel call - 1st call = %f(sec); 2nd call = %f(sec) \n", t1 - dsduration1, t2 - dsduration2 );
+    printf("Overhead of kernel call - 1st call = %f(sec)\n", t1 - dsduration1);
 
     tin = (end_tin.tv_sec  + end_tin.tv_usec/(double)(1000000))  - (start_tin.tv_sec  + start_tin.tv_usec/(double)(1000000));
     tout= (end_tout.tv_sec + end_tout.tv_usec/(double)(1000000)) - (start_tout.tv_sec + start_tout.tv_usec/(double)(1000000));
@@ -508,16 +488,6 @@ int main(int argc, char** argv)
     printf("\n");
     printf("gettimeofday - Transfer_in time = %f (sec); Transfer_out time = %f (sec) \n", tin, tout);
     printf("gettimeofday - Transfer_in Throughput = %f (MB/sec); Transfer_out Throughput = %f (MB/sec) \n", mbpersec_in, mbpersec_out);
-
-    //add clean up code
-    //
-
-    int numErrors = 0;
-    for (i = 0; i < globalbuffersize; i++) {
-	if (output_host[i] != input_host[i]) {numErrors++;};
-    }
-    printf("numErrors: %d\n", numErrors); 
-
     return EXIT_SUCCESS;
 
 }
