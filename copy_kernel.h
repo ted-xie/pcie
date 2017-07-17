@@ -1,17 +1,12 @@
 #ifndef COPY_KERNEL_H
 #define COPY_KERNEL_H
 
-#define DATA_SIZE 10*1024*1024
-#define OUTPUT_SIZE 10*1024*1024
+#include "settings.h"
+#include "ap_cint.h"
 
 typedef struct {
-    unsigned char  data[64];
-} din_t;
-
-typedef struct {
-    unsigned char data[64];
+    uint512 data[MULT];
 } dout_t;
-
-void bandwidth(dout_t *output_port, din_t *input_port);
+void bandwidth(dout_t *output_port, unsigned char *input_port);
 
 #endif

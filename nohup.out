@@ -1,0 +1,535 @@
+WARNING: Starting with SDAccel 2016.3, Tcl-based access will no longer be supported. Direct command line access via XOCC (and MakeFile) will be the main entry point to using SDAccel services. Please convert all Tcl scripts to the MakeFile based setup which will call XOCC directly or the scripts will no longer function in the next release. Please refer to examples in the SDAccel installation on usages of Makefile/XOCC for compiling SDAccel applications.
+
+****** sdaccel v2016.2 (64-bit)
+  **** SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source run_ku3_2ddr.tcl -notrace
+INFO: [SDAccel 60-409] Creating solution...
+INFO: [SDAccel 60-408]   Solution Name: 'prj_hw_ku3_2ddr'
+INFO: [SDAccel 60-407]   Solution Dir: '.'
+INFO: [SDAccel 60-234] Added host file: '/localtmp/tyx3gu/dev_pcie/kernel_global_bandwidth.c'
+INFO: [SDAccel 60-240] Creating binary container: 'bin_bandwidth'
+INFO: [SDAccel 60-423]   Target device: xilinx:adm-pcie-ku3:2ddr:3.0
+INFO: [SDAccel 60-242] Creating kernel: 'bandwidth'
+INFO: [SDAccel 60-234] Added kernel file: '/localtmp/tyx3gu/dev_pcie/copy_kernel.c'
+INFO: [SDAccel 60-241] Creating compute unit for binary container 'bin_bandwidth' using platform 'xilinx:adm-pcie-ku3:2ddr:3.0'...
+INFO: [SDAccel 60-238] Compiling host...
+INFO: [SDAccel 60-239] Compiling host...COMPLETE
+INFO: [SDAccel 60-346] Compiling application for cpu emulation using software accelerators...
+...
+..
+INFO: [SDAccel 60-347] Compiling application for cpu emulation using software accelerators...COMPLETE
+INFO: [SDAccel 60-348] Executing cpu emulation using software accelerators...
+INFO: [SDAccel 60-174] Running emulation command line: /localtmp/tyx3gu/dev_pcie/prj_hw_ku3_2ddr/impl/sim/cpu_em/prj_hw_ku3_2ddr.exe
+CL_PLATFORM_VENDOR Xilinx
+CL_PLATFORM_NAME Xilinx
+Selected xilinx:adm-pcie-ku3:2ddr:3.0 as the target device
+loading bin_bandwidth.xclbin
+WARNING: Usage: ./<executable> <xclbin> <input_file> <print output, y/n>
+INFO: Automatically sending dummy data...
+INFO: Not going to print out outputs...
+Starting kernel to read/write 10 MB bytes from/to global memory... 
+SUCCESS: Allocated input buffer memory.
+SUCCESS: Copied input data to input buffer.
+SUCCESS: Set kernel arguments.
+SUCCESS: Started executing kernel.
+SUCCESS: Kernel finished executing.
+SUCCESS: Read output buffer.
+Kernel completed read/write 10 MB bytes from/to global memory.
+clGetEventProfilingInfo - Execution time (1st) = 1.413645 (sec)
+clGetEventProfilingInfo - Concurrent Read and Write Throughput (1st) = 7.073911 (MB/sec)
+
+gettimeofday - Execution time (1st) = 1.543950 (sec)
+gettimeofday - Concurrent Read and Write Throughput (1st) = 6.476893 (MB/sec);
+
+Overhead of kernel call - 1st call = 0.130305(sec)
+
+gettimeofday - Transfer_in time = 0.002516 (sec); Transfer_out time = 0.314257 (sec) 
+gettimeofday - Transfer_in Throughput = 3974.513409 (MB/sec); Transfer_out Throughput = 31.821099 (MB/sec) 
+INFO: [SDAccel 60-349] Executing cpu emulation using software accelerators...COMPLETE
+INFO: [SDAccel 60-244] Generating system estimate report...
+INFO: [SDAccel 60-245] Generating system estimate report...COMPLETE
+===============================================================================
+Version:    sdaccel v2016.2 (64-bit)
+Build:      SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+Copyright:  Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+===============================================================================
+
+-------------------------------------------------------------------------------
+Design Name:      prj_hw_ku3_2ddr
+Target Device:    xilinx:adm-pcie-ku3:2ddr:3.0
+Target Clock:     250MHz
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+Kernel Summary
+
+Total number of kernels: 1
+
++-----------------------+------------+----------------------+-----------------+---------------+
+| Kernel Name           | Type       | Target               | OpenCL Library  | Compute Units |
++-----------------------+------------+----------------------+-----------------+---------------+
+| bandwidth             | c          | fpga0:OCL_REGION_0   | bin_bandwidth   | 1             |
++-----------------------+------------+----------------------+-----------------+---------------+
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+OpenCL Binary = bin_bandwidth
+
+Kernels mapped to = clc_region
+
+Timing Information (MHz)
++----------------------+-------------------------+-------------------------+-------------------------+
+| Compute Unit         | Kernel Name             | Target Frequency        | Estimated Frequency     |
++----------------------+-------------------------+-------------------------+-------------------------+
+| bandwidth0           | bandwidth               | 250                     | 342.466                 |
++----------------------+-------------------------+-------------------------+-------------------------+
+
+Latency Information (clock cycles)
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| Compute Unit         | Kernel Name          | Start Interval       | Best Case            | Avg Case             | Worst Case           |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| bandwidth0           | bandwidth            | 10485776             | 10485775             | 10485775             | 10485775             |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+
+Area Information
++----------------------+----------------------+------------+------------+------------+------------+
+| Compute Unit         | Kernel Name          | FF         | LUT        | DSP        | BRAM       |
++----------------------+----------------------+------------+------------+------------+------------+
+| bandwidth0           | bandwidth            | 3191       | 3548       | 0          | 60         |
++----------------------+----------------------+------------+------------+------------+------------+
+-------------------------------------------------------------------------------
+INFO: [SDAccel 60-238] Compiling host...
+INFO: [SDAccel 60-239] Compiling host...COMPLETE
+INFO: [SDAccel 60-120] Building system...
+.......
+.....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+INFO: [SDAccel 60-264] Building system...COMPLETE
+INFO: [SDAccel 60-654] The generated Xilinx binary containers can only be executed on board with DSA 'xilinx:adm-pcie-ku3:2ddr:3.0'.
+INFO: [SDAccel 60-267] Packaging for PCIe...
+INFO: [SDAccel 60-268] Packaging for PCIe...COMPLETE
+INFO: [Common 17-206] Exiting sdaccel at Fri Jul 14 00:47:57 2017...
+WARNING: Starting with SDAccel 2016.3, Tcl-based access will no longer be supported. Direct command line access via XOCC (and MakeFile) will be the main entry point to using SDAccel services. Please convert all Tcl scripts to the MakeFile based setup which will call XOCC directly or the scripts will no longer function in the next release. Please refer to examples in the SDAccel installation on usages of Makefile/XOCC for compiling SDAccel applications.
+
+****** sdaccel v2016.2 (64-bit)
+  **** SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source run_ku3_2ddr.tcl -notrace
+INFO: [SDAccel 60-409] Creating solution...
+INFO: [SDAccel 60-408]   Solution Name: 'prj_hw_ku3_2ddr'
+INFO: [SDAccel 60-407]   Solution Dir: '.'
+INFO: [SDAccel 60-234] Added host file: '/localtmp/tyx3gu/dev_pcie/kernel_global_bandwidth.c'
+INFO: [SDAccel 60-240] Creating binary container: 'bin_bandwidth'
+INFO: [SDAccel 60-423]   Target device: xilinx:adm-pcie-ku3:2ddr:3.0
+INFO: [SDAccel 60-242] Creating kernel: 'bandwidth'
+INFO: [SDAccel 60-234] Added kernel file: '/localtmp/tyx3gu/dev_pcie/copy_kernel.c'
+INFO: [SDAccel 60-241] Creating compute unit for binary container 'bin_bandwidth' using platform 'xilinx:adm-pcie-ku3:2ddr:3.0'...
+INFO: [SDAccel 60-238] Compiling host...
+WARNING: [Common 17-1309] Gcc: /localtmp/tyx3gu/dev_pcie/kernel_global_bandwidth.c:193:integer overflow in expression [-Woverflow]
+INFO: [SDAccel 60-239] Compiling host...COMPLETE
+INFO: [SDAccel 60-346] Compiling application for cpu emulation using software accelerators...
+...
+..
+INFO: [SDAccel 60-347] Compiling application for cpu emulation using software accelerators...COMPLETE
+INFO: [SDAccel 60-348] Executing cpu emulation using software accelerators...
+INFO: [SDAccel 60-174] Running emulation command line: /localtmp/tyx3gu/dev_pcie/prj_hw_ku3_2ddr/impl/sim/cpu_em/prj_hw_ku3_2ddr.exe
+CL_PLATFORM_VENDOR Xilinx
+CL_PLATFORM_NAME Xilinx
+Selected xilinx:adm-pcie-ku3:2ddr:3.0 as the target device
+loading bin_bandwidth.xclbin
+Error: Failed to allocate host side copy of OpenCL source buffer of size -1610612736
+ERROR: [SDAccel 60-301] Run emulation failed
+INFO: [SDAccel 60-349] Executing cpu emulation using software accelerators...COMPLETE
+ERROR: [Common 17-39] 'run_emulation' failed due to earlier errors.
+
+    while executing
+"run_emulation -flow cpu "
+    (file "run_ku3_2ddr.tcl" line 37)
+INFO: [Common 17-206] Exiting sdaccel at Fri Jul 14 11:03:49 2017...
+WARNING: Starting with SDAccel 2016.3, Tcl-based access will no longer be supported. Direct command line access via XOCC (and MakeFile) will be the main entry point to using SDAccel services. Please convert all Tcl scripts to the MakeFile based setup which will call XOCC directly or the scripts will no longer function in the next release. Please refer to examples in the SDAccel installation on usages of Makefile/XOCC for compiling SDAccel applications.
+
+****** sdaccel v2016.2 (64-bit)
+  **** SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source run_ku3_2ddr.tcl -notrace
+INFO: [SDAccel 60-409] Creating solution...
+INFO: [SDAccel 60-408]   Solution Name: 'prj_hw_ku3_2ddr'
+INFO: [SDAccel 60-407]   Solution Dir: '.'
+INFO: [SDAccel 60-234] Added host file: '/localtmp/tyx3gu/dev_pcie/kernel_global_bandwidth.c'
+INFO: [SDAccel 60-240] Creating binary container: 'bin_bandwidth'
+INFO: [SDAccel 60-423]   Target device: xilinx:adm-pcie-ku3:2ddr:3.0
+INFO: [SDAccel 60-242] Creating kernel: 'bandwidth'
+INFO: [SDAccel 60-234] Added kernel file: '/localtmp/tyx3gu/dev_pcie/copy_kernel.c'
+INFO: [SDAccel 60-241] Creating compute unit for binary container 'bin_bandwidth' using platform 'xilinx:adm-pcie-ku3:2ddr:3.0'...
+INFO: [SDAccel 60-244] Generating system estimate report...
+INFO: [SDAccel 60-245] Generating system estimate report...COMPLETE
+===============================================================================
+Version:    sdaccel v2016.2 (64-bit)
+Build:      SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+Copyright:  Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+===============================================================================
+
+-------------------------------------------------------------------------------
+Design Name:      prj_hw_ku3_2ddr
+Target Device:    xilinx:adm-pcie-ku3:2ddr:3.0
+Target Clock:     250MHz
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+Kernel Summary
+
+Total number of kernels: 1
+
++-----------------------+------------+----------------------+-----------------+---------------+
+| Kernel Name           | Type       | Target               | OpenCL Library  | Compute Units |
++-----------------------+------------+----------------------+-----------------+---------------+
+| bandwidth             | c          | fpga0:OCL_REGION_0   | bin_bandwidth   | 1             |
++-----------------------+------------+----------------------+-----------------+---------------+
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+OpenCL Binary = bin_bandwidth
+
+Kernels mapped to = clc_region
+
+Timing Information (MHz)
++----------------------+-------------------------+-------------------------+-------------------------+
+| Compute Unit         | Kernel Name             | Target Frequency        | Estimated Frequency     |
++----------------------+-------------------------+-------------------------+-------------------------+
+| bandwidth0           | bandwidth               | 250                     | 342.466                 |
++----------------------+-------------------------+-------------------------+-------------------------+
+
+Latency Information (clock cycles)
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| Compute Unit         | Kernel Name          | Start Interval       | Best Case            | Avg Case             | Worst Case           |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| bandwidth0           | bandwidth            | 157286417            | 157286416            | 157286416            | 157286416            |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+
+Area Information
++----------------------+----------------------+------------+------------+------------+------------+
+| Compute Unit         | Kernel Name          | FF         | LUT        | DSP        | BRAM       |
++----------------------+----------------------+------------+------------+------------+------------+
+| bandwidth0           | bandwidth            | 2251       | 3130       | 0          | 4          |
++----------------------+----------------------+------------+------------+------------+------------+
+-------------------------------------------------------------------------------
+INFO: [SDAccel 60-238] Compiling host...
+INFO: [SDAccel 60-239] Compiling host...COMPLETE
+INFO: [SDAccel 60-120] Building system...
+........
+.....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+INFO: [SDAccel 60-264] Building system...COMPLETE
+INFO: [SDAccel 60-654] The generated Xilinx binary containers can only be executed on board with DSA 'xilinx:adm-pcie-ku3:2ddr:3.0'.
+INFO: [SDAccel 60-267] Packaging for PCIe...
+INFO: [SDAccel 60-268] Packaging for PCIe...COMPLETE
+INFO: [Common 17-206] Exiting sdaccel at Fri Jul 14 18:27:03 2017...
+WARNING: Starting with SDAccel 2016.3, Tcl-based access will no longer be supported. Direct command line access via XOCC (and MakeFile) will be the main entry point to using SDAccel services. Please convert all Tcl scripts to the MakeFile based setup which will call XOCC directly or the scripts will no longer function in the next release. Please refer to examples in the SDAccel installation on usages of Makefile/XOCC for compiling SDAccel applications.
+
+****** sdaccel v2016.2 (64-bit)
+  **** SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source run_ku3_2ddr.tcl -notrace
+INFO: [SDAccel 60-409] Creating solution...
+INFO: [SDAccel 60-408]   Solution Name: 'prj_hw_ku3_2ddr'
+INFO: [SDAccel 60-407]   Solution Dir: '.'
+INFO: [SDAccel 60-234] Added host file: '/localtmp/tyx3gu/dev_pcie/kernel_global_bandwidth.c'
+INFO: [SDAccel 60-240] Creating binary container: 'bin_bandwidth'
+INFO: [SDAccel 60-423]   Target device: xilinx:adm-pcie-ku3:2ddr:3.0
+INFO: [SDAccel 60-242] Creating kernel: 'bandwidth'
+INFO: [SDAccel 60-234] Added kernel file: '/localtmp/tyx3gu/dev_pcie/copy_kernel.c'
+INFO: [SDAccel 60-241] Creating compute unit for binary container 'bin_bandwidth' using platform 'xilinx:adm-pcie-ku3:2ddr:3.0'...
+INFO: [SDAccel 60-244] Generating system estimate report...
+INFO: [SDAccel 60-245] Generating system estimate report...COMPLETE
+===============================================================================
+Version:    sdaccel v2016.2 (64-bit)
+Build:      SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+Copyright:  Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+===============================================================================
+
+-------------------------------------------------------------------------------
+Design Name:      prj_hw_ku3_2ddr
+Target Device:    xilinx:adm-pcie-ku3:2ddr:3.0
+Target Clock:     250MHz
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+Kernel Summary
+
+Total number of kernels: 1
+
++-----------------------+------------+----------------------+-----------------+---------------+
+| Kernel Name           | Type       | Target               | OpenCL Library  | Compute Units |
++-----------------------+------------+----------------------+-----------------+---------------+
+| bandwidth             | c          | fpga0:OCL_REGION_0   | bin_bandwidth   | 1             |
++-----------------------+------------+----------------------+-----------------+---------------+
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+OpenCL Binary = bin_bandwidth
+
+Kernels mapped to = clc_region
+
+Timing Information (MHz)
++----------------------+-------------------------+-------------------------+-------------------------+
+| Compute Unit         | Kernel Name             | Target Frequency        | Estimated Frequency     |
++----------------------+-------------------------+-------------------------+-------------------------+
+| bandwidth0           | bandwidth               | 250                     | 342.466                 |
++----------------------+-------------------------+-------------------------+-------------------------+
+
+Latency Information (clock cycles)
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| Compute Unit         | Kernel Name          | Start Interval       | Best Case            | Avg Case             | Worst Case           |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| bandwidth0           | bandwidth            | 31457297             | 31457296             | 31457296             | 31457296             |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+
+Area Information
++----------------------+----------------------+------------+------------+------------+------------+
+| Compute Unit         | Kernel Name          | FF         | LUT        | DSP        | BRAM       |
++----------------------+----------------------+------------+------------+------------+------------+
+| bandwidth0           | bandwidth            | 1712       | 2524       | 0          | 4          |
++----------------------+----------------------+------------+------------+------------+------------+
+-------------------------------------------------------------------------------
+INFO: [SDAccel 60-238] Compiling host...
+INFO: [SDAccel 60-239] Compiling host...COMPLETE
+INFO: [SDAccel 60-120] Building system...
+.......
+..........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+INFO: [SDAccel 60-264] Building system...COMPLETE
+INFO: [SDAccel 60-654] The generated Xilinx binary containers can only be executed on board with DSA 'xilinx:adm-pcie-ku3:2ddr:3.0'.
+INFO: [SDAccel 60-267] Packaging for PCIe...
+INFO: [SDAccel 60-268] Packaging for PCIe...COMPLETE
+INFO: [Common 17-206] Exiting sdaccel at Fri Jul 14 23:10:35 2017...
+WARNING: Starting with SDAccel 2016.3, Tcl-based access will no longer be supported. Direct command line access via XOCC (and MakeFile) will be the main entry point to using SDAccel services. Please convert all Tcl scripts to the MakeFile based setup which will call XOCC directly or the scripts will no longer function in the next release. Please refer to examples in the SDAccel installation on usages of Makefile/XOCC for compiling SDAccel applications.
+
+****** sdaccel v2016.2 (64-bit)
+  **** SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source run_ku3_2ddr.tcl -notrace
+INFO: [SDAccel 60-409] Creating solution...
+INFO: [SDAccel 60-408]   Solution Name: 'prj_hw_ku3_2ddr'
+INFO: [SDAccel 60-407]   Solution Dir: '.'
+INFO: [SDAccel 60-234] Added host file: '/localtmp/tyx3gu/dev_pcie/kernel_global_bandwidth.c'
+INFO: [SDAccel 60-240] Creating binary container: 'bin_bandwidth'
+INFO: [SDAccel 60-423]   Target device: xilinx:adm-pcie-ku3:2ddr:3.0
+INFO: [SDAccel 60-242] Creating kernel: 'bandwidth'
+INFO: [SDAccel 60-234] Added kernel file: '/localtmp/tyx3gu/dev_pcie/copy_kernel.c'
+INFO: [SDAccel 60-241] Creating compute unit for binary container 'bin_bandwidth' using platform 'xilinx:adm-pcie-ku3:2ddr:3.0'...
+INFO: [SDAccel 60-244] Generating system estimate report...
+INFO: [SDAccel 60-245] Generating system estimate report...COMPLETE
+===============================================================================
+Version:    sdaccel v2016.2 (64-bit)
+Build:      SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+Copyright:  Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+===============================================================================
+
+-------------------------------------------------------------------------------
+Design Name:      prj_hw_ku3_2ddr
+Target Device:    xilinx:adm-pcie-ku3:2ddr:3.0
+Target Clock:     250MHz
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+Kernel Summary
+
+Total number of kernels: 1
+
++-----------------------+------------+----------------------+-----------------+---------------+
+| Kernel Name           | Type       | Target               | OpenCL Library  | Compute Units |
++-----------------------+------------+----------------------+-----------------+---------------+
+| bandwidth             | c          | fpga0:OCL_REGION_0   | bin_bandwidth   | 1             |
++-----------------------+------------+----------------------+-----------------+---------------+
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+OpenCL Binary = bin_bandwidth
+
+Kernels mapped to = clc_region
+
+Timing Information (MHz)
++----------------------+-------------------------+-------------------------+-------------------------+
+| Compute Unit         | Kernel Name             | Target Frequency        | Estimated Frequency     |
++----------------------+-------------------------+-------------------------+-------------------------+
+| bandwidth0           | bandwidth               | 250                     | 342.466                 |
++----------------------+-------------------------+-------------------------+-------------------------+
+
+Latency Information (clock cycles)
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| Compute Unit         | Kernel Name          | Start Interval       | Best Case            | Avg Case             | Worst Case           |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| bandwidth0           | bandwidth            | 10485776             | 10485775             | 10485775             | 10485775             |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+
+Area Information
++----------------------+----------------------+------------+------------+------------+------------+
+| Compute Unit         | Kernel Name          | FF         | LUT        | DSP        | BRAM       |
++----------------------+----------------------+------------+------------+------------+------------+
+| bandwidth0           | bandwidth            | 3191       | 3548       | 0          | 60         |
++----------------------+----------------------+------------+------------+------------+------------+
+-------------------------------------------------------------------------------
+INFO: [SDAccel 60-238] Compiling host...
+INFO: [SDAccel 60-239] Compiling host...COMPLETE
+INFO: [SDAccel 60-120] Building system...
+.......
+...........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+INFO: [SDAccel 60-264] Building system...COMPLETE
+INFO: [SDAccel 60-654] The generated Xilinx binary containers can only be executed on board with DSA 'xilinx:adm-pcie-ku3:2ddr:3.0'.
+INFO: [SDAccel 60-267] Packaging for PCIe...
+INFO: [SDAccel 60-268] Packaging for PCIe...COMPLETE
+INFO: [Common 17-206] Exiting sdaccel at Mon Jul 17 12:27:36 2017...
+WARNING: Starting with SDAccel 2016.3, Tcl-based access will no longer be supported. Direct command line access via XOCC (and MakeFile) will be the main entry point to using SDAccel services. Please convert all Tcl scripts to the MakeFile based setup which will call XOCC directly or the scripts will no longer function in the next release. Please refer to examples in the SDAccel installation on usages of Makefile/XOCC for compiling SDAccel applications.
+
+****** sdaccel v2016.2 (64-bit)
+  **** SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source run_ku3_2ddr.tcl -notrace
+INFO: [SDAccel 60-409] Creating solution...
+INFO: [SDAccel 60-408]   Solution Name: 'prj_hw_ku3_2ddr'
+INFO: [SDAccel 60-407]   Solution Dir: '.'
+INFO: [SDAccel 60-234] Added host file: '/localtmp/tyx3gu/dev_pcie/kernel_global_bandwidth.c'
+INFO: [SDAccel 60-240] Creating binary container: 'bin_bandwidth'
+INFO: [SDAccel 60-423]   Target device: xilinx:adm-pcie-ku3:2ddr:3.0
+INFO: [SDAccel 60-242] Creating kernel: 'bandwidth'
+INFO: [SDAccel 60-234] Added kernel file: '/localtmp/tyx3gu/dev_pcie/copy_kernel.c'
+INFO: [SDAccel 60-241] Creating compute unit for binary container 'bin_bandwidth' using platform 'xilinx:adm-pcie-ku3:2ddr:3.0'...
+INFO: [SDAccel 60-244] Generating system estimate report...
+INFO: [SDAccel 60-245] Generating system estimate report...COMPLETE
+===============================================================================
+Version:    sdaccel v2016.2 (64-bit)
+Build:      SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+Copyright:  Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+===============================================================================
+
+-------------------------------------------------------------------------------
+Design Name:      prj_hw_ku3_2ddr
+Target Device:    xilinx:adm-pcie-ku3:2ddr:3.0
+Target Clock:     250MHz
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+Kernel Summary
+
+Total number of kernels: 1
+
++-----------------------+------------+----------------------+-----------------+---------------+
+| Kernel Name           | Type       | Target               | OpenCL Library  | Compute Units |
++-----------------------+------------+----------------------+-----------------+---------------+
+| bandwidth             | c          | fpga0:OCL_REGION_0   | bin_bandwidth   | 1             |
++-----------------------+------------+----------------------+-----------------+---------------+
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+OpenCL Binary = bin_bandwidth
+
+Kernels mapped to = clc_region
+
+Timing Information (MHz)
++----------------------+-------------------------+-------------------------+-------------------------+
+| Compute Unit         | Kernel Name             | Target Frequency        | Estimated Frequency     |
++----------------------+-------------------------+-------------------------+-------------------------+
+| bandwidth0           | bandwidth               | 250                     | 342.466                 |
++----------------------+-------------------------+-------------------------+-------------------------+
+
+Latency Information (clock cycles)
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| Compute Unit         | Kernel Name          | Start Interval       | Best Case            | Avg Case             | Worst Case           |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| bandwidth0           | bandwidth            | 73400337             | 73400336             | 73400336             | 73400336             |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+
+Area Information
++----------------------+----------------------+------------+------------+------------+------------+
+| Compute Unit         | Kernel Name          | FF         | LUT        | DSP        | BRAM       |
++----------------------+----------------------+------------+------------+------------+------------+
+| bandwidth0           | bandwidth            | 1908       | 2706       | 0          | 4          |
++----------------------+----------------------+------------+------------+------------+------------+
+-------------------------------------------------------------------------------
+INFO: [SDAccel 60-238] Compiling host...
+INFO: [SDAccel 60-239] Compiling host...COMPLETE
+INFO: [SDAccel 60-120] Building system...
+.......
+........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+INFO: [SDAccel 60-264] Building system...COMPLETE
+INFO: [SDAccel 60-654] The generated Xilinx binary containers can only be executed on board with DSA 'xilinx:adm-pcie-ku3:2ddr:3.0'.
+INFO: [SDAccel 60-267] Packaging for PCIe...
+INFO: [SDAccel 60-268] Packaging for PCIe...COMPLETE
+INFO: [Common 17-206] Exiting sdaccel at Mon Jul 17 13:22:15 2017...
+WARNING: Starting with SDAccel 2016.3, Tcl-based access will no longer be supported. Direct command line access via XOCC (and MakeFile) will be the main entry point to using SDAccel services. Please convert all Tcl scripts to the MakeFile based setup which will call XOCC directly or the scripts will no longer function in the next release. Please refer to examples in the SDAccel installation on usages of Makefile/XOCC for compiling SDAccel applications.
+
+****** sdaccel v2016.2 (64-bit)
+  **** SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+source run_ku3_2ddr.tcl -notrace
+INFO: [SDAccel 60-409] Creating solution...
+INFO: [SDAccel 60-408]   Solution Name: 'prj_hw_ku3_2ddr'
+INFO: [SDAccel 60-407]   Solution Dir: '.'
+INFO: [SDAccel 60-234] Added host file: '/localtmp/tyx3gu/dev_pcie/kernel_global_bandwidth.c'
+INFO: [SDAccel 60-240] Creating binary container: 'bin_bandwidth'
+INFO: [SDAccel 60-423]   Target device: xilinx:adm-pcie-ku3:2ddr:3.0
+INFO: [SDAccel 60-242] Creating kernel: 'bandwidth'
+INFO: [SDAccel 60-234] Added kernel file: '/localtmp/tyx3gu/dev_pcie/copy_kernel.c'
+INFO: [SDAccel 60-241] Creating compute unit for binary container 'bin_bandwidth' using platform 'xilinx:adm-pcie-ku3:2ddr:3.0'...
+INFO: [SDAccel 60-244] Generating system estimate report...
+INFO: [SDAccel 60-245] Generating system estimate report...COMPLETE
+===============================================================================
+Version:    sdaccel v2016.2 (64-bit)
+Build:      SW Build 1660434 on Tue Sep 13 18:03:13 MDT 2016
+Copyright:  Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+===============================================================================
+
+-------------------------------------------------------------------------------
+Design Name:      prj_hw_ku3_2ddr
+Target Device:    xilinx:adm-pcie-ku3:2ddr:3.0
+Target Clock:     250MHz
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+Kernel Summary
+
+Total number of kernels: 1
+
++-----------------------+------------+----------------------+-----------------+---------------+
+| Kernel Name           | Type       | Target               | OpenCL Library  | Compute Units |
++-----------------------+------------+----------------------+-----------------+---------------+
+| bandwidth             | c          | fpga0:OCL_REGION_0   | bin_bandwidth   | 1             |
++-----------------------+------------+----------------------+-----------------+---------------+
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+OpenCL Binary = bin_bandwidth
+
+Kernels mapped to = clc_region
+
+Timing Information (MHz)
++----------------------+-------------------------+-------------------------+-------------------------+
+| Compute Unit         | Kernel Name             | Target Frequency        | Estimated Frequency     |
++----------------------+-------------------------+-------------------------+-------------------------+
+| bandwidth0           | bandwidth               | 250                     | 342.466                 |
++----------------------+-------------------------+-------------------------+-------------------------+
+
+Latency Information (clock cycles)
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| Compute Unit         | Kernel Name          | Start Interval       | Best Case            | Avg Case             | Worst Case           |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+| bandwidth0           | bandwidth            | 157286418            | 157286417            | 157286417            | 157286417            |
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+
+Area Information
++----------------------+----------------------+------------+------------+------------+------------+
+| Compute Unit         | Kernel Name          | FF         | LUT        | DSP        | BRAM       |
++----------------------+----------------------+------------+------------+------------+------------+
+| bandwidth0           | bandwidth            | 2252       | 3134       | 0          | 4          |
++----------------------+----------------------+------------+------------+------------+------------+
+-------------------------------------------------------------------------------
+INFO: [SDAccel 60-238] Compiling host...
+INFO: [SDAccel 60-239] Compiling host...COMPLETE
+INFO: [SDAccel 60-120] Building system...
+........
+..............................................................................................................................................................................................................................................................................................................................................................

@@ -32,9 +32,9 @@ map_connect  -opencl_binary [get_opencl_binary bin_bandwidth] \
     -src_type "kernel" -src_name "bandwidth0"   -src_port "M_AXI_GMEM1" \
     -dst_type "core"   -dst_name "OCL_REGION_0" -dst_port "M01_AXI"
 
-#compile for emulation
-compile_emulation -flow cpu -opencl_binary [get_opencl_binary bandwidth]
-run_emulation -flow cpu 
+# Compile for emulation
+#compile_emulation -flow cpu -opencl_binary [get_opencl_binary bandwidth]
+#run_emulation -flow cpu 
 
 #Create estimated resource usage and latency report
 report_estimate

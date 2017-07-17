@@ -1,0 +1,8 @@
+#ifndef SETTINGS_H
+#define SETTINGS_H
+
+#define DATA_SIZE 10*1024*1024L
+#define REPORTS 4096
+#define MULT REPORTS/512
+#define OUTPUT_SIZE REPORTS/8*DATA_SIZE
+#endif

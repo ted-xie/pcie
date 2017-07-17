@@ -9,7 +9,7 @@
 
 #include <unistd.h>
 #include <sys/time.h>
-#include "copy_kernel.h"
+#include "settings.h"
 /////////////////////////////////////////////////////////////////////////////////
 //load_file_to_memory
 //Allocated memory for and load file from disk memory
@@ -191,6 +191,9 @@ int main(int argc, char** argv)
     unsigned int i;
     size_t globalbuffersize = DATA_SIZE;
     size_t globaloutputsize = OUTPUT_SIZE;
+    printf("INFO: Using %d-bit size_t...\n", 8*sizeof(size_t));
+    printf("INFO: Input data size is %lu bytes.\n", DATA_SIZE);
+    printf("INFO: Output data size is %lu bytes.\n", OUTPUT_SIZE);
 
     //opencl setup
     cl_platform_id platform_id;
